@@ -5,7 +5,7 @@ const Midsection = () => {
     <div className="px-6 py-16 flex flex-col items-center text-center">
       
       {/* Heading */}
-      <h1 className="font-sans text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-4xl">
+      <h1 className="font-sans text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-4xl">
         Create amazing content with{" "}
         <span className="text-[#1253de]">Aivon Ai</span>
       </h1>
