@@ -1,7 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 // import { assets } from '../public/assets'
 
+
 const Navbar = () => {
+
+  const navbar = useNavigate();
   return (
     <nav className="w-full px-4 sm:px-6 md:px-10 ">
 
@@ -16,14 +20,15 @@ const Navbar = () => {
 
         {/* Button */}
         <button
-          type="button"
-          className="text-white bg-[#1253de] hover:bg-[#0f44c5]
+        onClick={()=> navbar('/login')}
+          type='button'
+          className=" cursor-pointer text-white bg-[#2058d0] hover:bg-[#114ce1]
                      text-xs sm:text-sm md:text-base
                      px-4 sm:px-5 md:px-6
                      py-2 sm:py-2.5
                      inline-flex items-center gap-2
                      rounded-full
-                     transition-all duration-300"
+                     transition-all duration-300 shadow-md hover:shadow-xl"
         >
           <span className="hidden md:inline">Get Started</span>
 

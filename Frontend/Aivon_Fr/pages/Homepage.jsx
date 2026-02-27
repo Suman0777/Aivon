@@ -2,28 +2,33 @@ import React from 'react'
 import Navbar from '../Componet/Navbar'
 import Midsection from '../Componet/Midsection'
 import SecondLower from '../Componet/SecondLower'
-import { RetroGridDemo } from '../SmallComponet/RetroGridDemo'
 import { RetroGrid } from "@/components/ui/retro-grid"
 
 const Homepage = () => {
   return (
     <div className="w-full overflow-x-hidden">
-      <RetroGrid/>
-      {/*Nav +  Midsection */}
-      <div className="w-full min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage:  `url("gradientBackground.png")`}}
-      > 
-      <Navbar />
-        <div className="p-4">
+
+      {/* Hero Section */}
+      <section className="relative w-full min-h-screen overflow-hidden">
+
+        {/* Background Grid */}
+        <RetroGrid />
+
+        {/* Content Layer */}
+        <div
+          className="relative z-10 w-full min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url("/gradientBackground.png")` }}
+        >
+          <Navbar />
           <Midsection />
         </div>
-        
-      </div>
+
+      </section>
 
       {/* Second Section */}
-      <div className="w-full px-4">
+      <section className="w-full px-4 ">
         <SecondLower />
-      </div>
+      </section>
 
     </div>
   )
