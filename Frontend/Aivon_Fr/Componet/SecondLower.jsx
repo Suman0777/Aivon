@@ -1,71 +1,94 @@
-import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const SecondLower = () => {
-
-    const cardData = [
-        {
-            img: '',
-            title: 'AI Chat',
-            description: 'Smart conversational AI to answer your questions instantly.'
-        },
-        {
-            img: '',
-            title: 'BG Remover',
-            description: 'Remove image backgrounds automatically with AI precision.'
-        },
-        {
-            img: '',
-            title: 'Text to Image',
-            description: 'Generate stunning images from simple text prompts.'
-        },
-        {
-            img: '',
-            title: 'Text to Voice',
-            description: 'Convert written text into natural-sounding voice.'
-        }
-    ]
+  const cardData = [
+    {
+      image: "/image_generation.png",
+      title: "AI Chat",
+      description:
+        "Smart conversational AI to answer your questions instantly.",
+    },
+    {
+      image: "/image_generation.png",
+      title: "BG Remover",
+      description:
+        "Remove image backgrounds automatically with AI precision.",
+    },
+    {
+      image: "/image_generation.png",
+      title: "Text to Image",
+      description:
+        "Generate stunning images from simple text prompts.",
+    },
+    {
+      image: "/image_generation.png",
+      title: "Text to Voice",
+      description:
+        "Convert written text into natural-sounding voice.",
+    },
+    {
+      image: "/image_generation.png",
+      title: "Ai Article Writer",
+      description:
+        "Generate high-quality articles on any topic with AI writing assistance.",
+    },
+    {
+      image: "/image_generation.png",
+      title: "Text to Voice",
+      description:
+        "Convert written text into natural-sounding voice.",
+    },
+  ];
 
   return (
-    <div className='flex flex-col items-center w-full py-16 px-4'>
-        
-        {/* Heading Section */}
-        <div className='text-center max-w-2xl'>
-            <h1 className='text-3xl md:text-5xl font-bold text-gray-700'>
-                Aivon Provide AI Tools
-            </h1>
-            <p className='text-gray-600 mt-3 font-medium'>
-                Everything you need to create, edit, enhance or optimise your content with cutting-edge AI technology.
+    <div className="flex flex-col items-center w-full py-24 px-6 ">
+      
+      {/* Heading */}
+      <div className="text-center max-w-2xl">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 font-sans gap-">
+          Powerful AI Tools
+        </h1>
+        <p className="text-gray-600 mt-4 text-sm sm:text-base md:text-sm max-w-xl font-medium">
+          Everything you need to create, enhance, and optimize your content
+          with cutting-edge AI technology.
+        </p>
+      </div>
+
+      {/* Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-20 w-full max-w-6xl">
+        {cardData.map((card, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ y: -8 }}
+            className="bg-gray-100/60 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+          >
+            {/* Icon Container */}
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center shadow-md">
+              <img
+                src={card.image}
+                alt={card.title}
+                className="w-7 h-7 object-contain"
+              />
+            </div>
+
+            {/* Content */}
+            <h2 className="text-lg font-semibold mt-6 text-gray-900">
+              {card.title}
+            </h2>
+
+            <p className="text-gray-500 text-sm mt-3 leading-relaxed">
+              {card.description}
             </p>
-        </div>
-
-        {/* Grid Section */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 w-full max-w-6xl'>
-            {cardData.map((card, index) => (
-                <div 
-                    key={index} 
-                    className='bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition duration-300'
-                >
-                    <div className='h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center'>
-                        {card.img ? (
-                            <img src={card.img} alt={card.title} className='h-full w-full object-cover rounded-lg' />
-                        ) : (
-                            <span className='text-gray-400'>Image</span>
-                        )}
-                    </div>
-
-                    <h2 className='text-xl font-semibold mb-2'>
-                        {card.title}
-                    </h2>
-
-                    <p className='text-gray-600 text-sm'>
-                        {card.description}
-                    </p>
-                </div>
-            ))}
-        </div>
-
+          </motion.div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SecondLower
+export default SecondLower;

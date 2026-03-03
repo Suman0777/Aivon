@@ -1,32 +1,70 @@
-import React from 'react'
+import React from "react"
+import { motion } from "framer-motion"
 import { VideoText } from "@/components/ui/video-text"
+
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+}
+
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1], // smooth premium easing
+    },
+  },
+}
 
 const Midsection = () => {
   return (
-    <div className="px-6 flex flex-col items-center text-center">
-
-      {/* Heading */}
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="px-6 flex flex-col items-center text-center"
+    >
+      {/* Heading Section */}
       <div className="flex items-center justify-center gap-4 flex-wrap max-w-200">
-        <h1 className="font-sans text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-tight text-gray-800 ">
+        
+        <motion.h1
+          variants={fadeUp}
+          className="font-sans text-7xl lg:text-8xl font-bold leading-tight text-gray-900 max-w-screen"
+        >
           Create amazing content with
-        </h1>
+        </motion.h1>
 
-        <div className="relative h-[100px] w-[450px] overflow-hidden">
+        <motion.div
+          variants={fadeUp}
+          className="relative h-[100px] w-[450px] overflow-hidden"
+        >
           <VideoText src="https://cdn.magicui.design/ocean-small.webm">
             Aivon Ai
           </VideoText>
-        </div>
+        </motion.div>
       </div>
 
       {/* Paragraph */}
-      <p className="mt-6 text-gray-700 text-sm sm:text-base md:text-sm max-w-xl font-medium">
+      <motion.p
+        variants={fadeUp}
+        className="mt-6 text-gray-700 text-sm sm:text-base md:text-sm max-w-xl font-medium"
+      >
         Discover the power of AI with Aivon. Your all-in-one AI assistant.
         Chat with AI, remove backgrounds, generate images from text, and convert 
         text to voice, all in one seamless experience. 
         Unlock the full potential of AI with Aivon today.
-      </p>
-
-    </div>
+      </motion.p>
+    </motion.div>
   )
 }
 
