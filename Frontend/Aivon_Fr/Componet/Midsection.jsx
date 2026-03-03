@@ -7,11 +7,11 @@ const Midsection = () => {
 
       {/* Heading */}
       <div className="flex items-center justify-center gap-4 flex-wrap max-w-200">
-        <h1 className="font-sans text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-tight text-gray-950 ">
+        <h1 className="font-sans text-5xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-tight text-gray-800 ">
           Create amazing content with
         </h1>
 
-        <div className="relative h-[100px] w-[290px] overflow-hidden">
+        <div className="relative h-[100px] w-[450px] overflow-hidden">
           <VideoText src="https://cdn.magicui.design/ocean-small.webm">
             Aivon Ai
           </VideoText>

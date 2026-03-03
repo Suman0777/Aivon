@@ -3,6 +3,7 @@ const routes = express.Router();
 import Zod, { email } from "zod"
 import User from "../db.js";
 import JWT from "jsonwebtoken";
+import { auth } from "../auth.js";
 
 {/* This is for the Sign-UP */}
 
@@ -98,6 +99,22 @@ routes.post('/signin', async(req, res)=>{
         res.status(500).json({
             msg: "Server error"
         })
+    }
+})
+
+
+routes.get('/getalluser',auth, async(req, res)=>{
+    const users = await User.find().select("-password");
+
+    try {
+        res.status(200).json({
+            users
+        })
+    } catch (error) {
+        res.status(404).json({
+            msg: error.message
+        })
+        console.error(error.message);
     }
 })
 
