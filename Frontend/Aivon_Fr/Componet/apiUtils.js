@@ -1,8 +1,6 @@
 import Api from './Api';
 
-/**
- * User Authentication and Management API calls
- */
+{/* User Authentication and Management API calls */}
 
 // Sign up a new user
 export const signupUser = async (name, email, password) => {
