@@ -39,7 +39,7 @@ const Midsection = () => {
         
         <motion.h1
           variants={fadeUp}
-          className="font-sans text-7xl lg:text-8xl font-bold leading-tight text-gray-900 max-w-screen"
+          className="font-sans text-6xl lg:text-8xl font-bold leading-tight text-slate-100 max-w-screen tracking-tight"
         >
           Create amazing content with
         </motion.h1>
@@ -57,7 +57,7 @@ const Midsection = () => {
       {/* Paragraph */}
       <motion.p
         variants={fadeUp}
-        className="mt-6 text-gray-700 text-sm sm:text-base md:text-sm max-w-xl font-medium"
+        className="mt-6 text-slate-300 text-sm sm:text-base md:text-sm max-w-xl font-medium"
       >
         Discover the power of AI with Aivon. Your all-in-one AI assistant.
         Chat with AI, remove backgrounds, generate images from text, and convert 

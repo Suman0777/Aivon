@@ -47,10 +47,10 @@ const SecondLower = () => {
       
       {/* Heading */}
       <div className="text-center max-w-2xl">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 font-sans gap-">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-100 font-sans">
           Powerful AI Tools
         </h1>
-        <p className="text-gray-600 mt-4 text-sm sm:text-base md:text-sm max-w-xl font-medium">
+        <p className="text-slate-300 mt-4 text-sm sm:text-base md:text-sm max-w-xl font-medium">
           Everything you need to create, enhance, and optimize your content
           with cutting-edge AI technology.
         </p>
@@ -65,10 +65,10 @@ const SecondLower = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ y: -8 }}
-            className="bg-gray-100/60 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+            className="rounded-2xl border border-cyan-300/20 bg-slate-900/55 p-8 shadow-[0_0_16px_rgba(34,211,238,0.12)] backdrop-blur-sm transition-all duration-300 hover:border-cyan-300/40 hover:shadow-[0_0_24px_rgba(34,211,238,0.24)]"
           >
             {/* Icon Container */}
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center shadow-md">
+            <div className="w-14 h-14 rounded-xl bg-linear-to-tr from-cyan-400 to-blue-500 flex items-center justify-center shadow-[0_0_18px_rgba(56,189,248,0.45)]">
               <img
                 src={card.image}
                 alt={card.title}
@@ -77,11 +77,11 @@ const SecondLower = () => {
             </div>
 
             {/* Content */}
-            <h2 className="text-lg font-semibold mt-6 text-gray-900">
+            <h2 className="text-lg font-semibold mt-6 text-slate-100">
               {card.title}
             </h2>
 
-            <p className="text-gray-500 text-sm mt-3 leading-relaxed">
+            <p className="text-slate-300 text-sm mt-3 leading-relaxed">
               {card.description}
             </p>
           </motion.div>
