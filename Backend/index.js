@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv";
 import cores from "cors"
 import mainroutes from "./routes/mainrouter.js"
+import "./db.js"  // Initialize database connection
 
 const app = express();
 

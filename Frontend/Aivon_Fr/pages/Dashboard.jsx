@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import SidebarComponent from '../Componet/SidebarComponent'
 
 const Dashboard = () => {
   const { logout } = useAuth()
@@ -40,21 +41,23 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-2">Welcome back! Here are all registered users.</p>
+    <div className="flex min-h-screen bg-gray-100">
+      <SidebarComponent/>
+      <div className="flex-1 p-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
+              <p className="text-gray-600 mt-2">Welcome back! Here are all registered users.</p>
+            </div>
+            <Button 
+              variant="destructive"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </div>
-          <Button 
-            variant="destructive"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        </div>
 
         {/* Users Card */}
         <Card>
@@ -104,6 +107,7 @@ const Dashboard = () => {
           >
             {loading ? "Refreshing..." : "Refresh Users"}
           </Button>
+        </div>
         </div>
       </div>
     </div>

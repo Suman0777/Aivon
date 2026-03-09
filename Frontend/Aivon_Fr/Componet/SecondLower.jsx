@@ -36,9 +36,9 @@ const SecondLower = () => {
     },
     {
       image: "/image_generation.png",
-      title: "Text to Voice",
+      title: "Prompt Generator",
       description:
-        "Convert written text into natural-sounding voice.",
+        "Generate creative and effective prompts for your AI interactions.",
     },
   ];
 

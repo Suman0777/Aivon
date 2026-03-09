@@ -1,7 +1,7 @@
 import { Navigate } from "react-router";
 import { useAuth } from "../src/context/AuthContext";
 
-/**
+/*
  * ProtectedRoute Component
  * Wraps routes that require authentication
  * Redirects to login if user is not authenticated

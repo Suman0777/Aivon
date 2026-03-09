@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useNavigate } from "react-router"
 import Api from "../Componet/Api"
 import { useAuth } from "../src/context/AuthContext"
@@ -14,25 +14,27 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { BorderBeam } from "@/components/ui/border-beam"
+import { Toast } from 'primereact/toast';
 
 {/* ================= SIGNUP CARD ================= */}
 
-function SignupCard({ setActiveCard }) {
+function SignupCard({ setActiveCard, toast }) {
   const { login } = useAuth()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
 
   const handleSignup = async () => {
-    setError("")
-    setSuccess("")
     setLoading(true)
 
     if (!name || !email || !password) {
-      setError("All fields are required")
+      toast.current.show({
+        severity: 'warn',
+        summary: 'Missing Fields',
+        detail: 'All fields are required',
+        life: 3000
+      });
       setLoading(false)
       return
     }
@@ -43,14 +45,24 @@ function SignupCard({ setActiveCard }) {
         email,
         password
       })
-      setSuccess("Account created successfully! Please login.")
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Account created successfully!',
+        life: 3000
+      });
       login(response.data.token)
       setName("")
       setEmail("")
       setPassword("")
       setTimeout(() => setActiveCard(true), 1500)
     } catch (error) {
-      setError(error.response?.data?.msg || "Sign up failed")
+      toast.current.show({
+        severity: 'error',
+        summary: 'Signup Failed',
+        detail: error.response?.data?.msg || 'Sign up failed',
+        life: 3000
+      });
     } finally {
       setLoading(false)
     }
@@ -101,13 +113,6 @@ function SignupCard({ setActiveCard }) {
                 disabled={loading}
               />
             </div>
-
-            {error && (
-              <div className="text-sm text-red-500 mt-2">{error}</div>
-            )}
-            {success && (
-              <div className="text-sm text-green-500 mt-2">{success}</div>
-            )}
           </div>
         </form>
       </CardContent>
@@ -140,22 +145,23 @@ function SignupCard({ setActiveCard }) {
 
 {/* ================= LOGIN CARD ================= */}
 
-function Login({ setActiveCard }) {
+function Login({ setActiveCard, toast }) {
   const { login } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
 
   const handleLogin = async () => {
-    setError("")
-    setSuccess("")
     setLoading(true)
 
     if (!email || !password) {
-      setError("Email and password are required")
+      toast.current.show({
+        severity: 'warn',
+        summary: 'Missing Fields',
+        detail: 'Email and password are required',
+        life: 3000
+      });
       setLoading(false)
       return
     }
@@ -165,7 +171,12 @@ function Login({ setActiveCard }) {
         email,
         password
       })
-      setSuccess("Login successful!")
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Login successful!',
+        life: 3000
+      });
       login(response.data.token)
       setEmail("")
       setPassword("")
@@ -174,7 +185,12 @@ function Login({ setActiveCard }) {
         navigate("/dashboard")
       }, 1000)
     } catch (error) {
-      setError(error.response?.data?.msg || "Login failed")
+      toast.current.show({
+        severity: 'error',
+        summary: 'Login Failed',
+        detail: error.response?.data?.msg || 'Login failed',
+        life: 3000
+      });
     } finally {
       setLoading(false)
     }
@@ -215,13 +231,6 @@ function Login({ setActiveCard }) {
                 disabled={loading}
               />
             </div>
-
-            {error && (
-              <div className="text-sm text-red-500 mt-2">{error}</div>
-            )}
-            {success && (
-              <div className="text-sm text-green-500 mt-2">{success}</div>
-            )}
           </div>
         </form>
       </CardContent>
@@ -255,16 +264,18 @@ function Login({ setActiveCard }) {
 
 export default function LoginPage() {
   const [activeCard, setActiveCard] = useState(false)
+  const toast = useRef(null);
 
   return (
     <div
       className="flex items-center justify-center min-h-screen relative z-10 w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url("/gradientBackground.png")` }}
     >
+      <Toast ref={toast} />
       {activeCard ? (
-        <Login setActiveCard={setActiveCard} />
+        <Login setActiveCard={setActiveCard} toast={toast} />
       ) : (
-        <SignupCard setActiveCard={setActiveCard} />
+        <SignupCard setActiveCard={setActiveCard} toast={toast} />
       )}
     </div>
   )
