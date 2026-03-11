@@ -5,15 +5,15 @@ const Footer = () => {
     <footer className="w-full bg-slate-950/45 border-t border-cyan-300/20 mt-20">
       
       {/* Top Section */}
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-15">
 
         {/* 1️ Logo + Description */}
         <div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 justify-start">
             <img
-              src="/lodosss.png"
+              src="/pocket.png"
               alt="Aivon Logo"
-              className="w-10 h-10 object-contain"
+              className="h-10 w-auto object-contain"
             />
             <h2 className="text-xl font-semibold text-slate-100">
               Aivon.ai
@@ -33,7 +33,7 @@ const Footer = () => {
             Company
           </h3>
 
-          <div className="flex flex-col gap-4 text-slate-300 text-sm">
+          <div className="flex flex-col gap-3 text-slate-300 text-sm">
             <a href="#" className="hover:text-cyan-300 transition">
               Home
             </a>
@@ -53,25 +53,27 @@ const Footer = () => {
         </div>
 
         {/* 3️ Newsletter */}
-        <div>
+        <div className="">
           <h3 className="text-lg font-semibold text-slate-100 mb-4">
             Subscribe to our newsletter
           </h3>
 
-          <p className="text-slate-300 text-sm mb-6">
+          <p className="text-slate-300 text-sm mb-6 ">
             The latest news, articles, and resources, sent to your inbox weekly.
           </p>
 
-          <div className="flex items-center gap-3">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 rounded-lg border border-cyan-300/30 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-            />
-            <button className="rounded-lg border border-cyan-300/40 bg-cyan-400/15 px-5 py-2 text-sm font-medium text-cyan-100 transition hover:bg-cyan-400/25">
-              Subscribe
-            </button>
+          <div className="flex flex-col sm:flex-row gap-2 w-full">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full rounded-lg border border-cyan-300/30 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              />
+
+              <button className="w-full sm:w-auto rounded-lg border border-cyan-300/40 bg-cyan-400/15 px-5 py-2 text-sm font-medium text-cyan-100 transition hover:bg-cyan-400/25">
+                Subscribe
+              </button>
           </div>
+
         </div>
 
       </div>
