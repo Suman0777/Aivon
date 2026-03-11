@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../src/context/AuthContext'
 import Api from '../Componet/Api'
-import { Button } from '@/components/ui/button'
+import Chatai from '../Aicomponet/Chatai'
+        
 import {
   Card,
   CardContent,
@@ -59,75 +60,19 @@ const Dashboard = () => {
         />
       </div>
 
+      {/* Main Content Area */}
+      
+      <div className='flex w-full h-full relative z-10'>
+      
+      {/* Slidebar */}
+      <div className="lg:fixed">
       <SidebarComponent/>
-      <div className="relative z-10 flex-1 p-6 sm:p-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-4xl font-bold text-slate-100">Dashboard</h1>
-              <p className="text-slate-300 mt-2">Welcome back! Here are all registered users.</p>
-            </div>
-            <Button 
-              variant="destructive"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
-          </div>
-
-        {/* Users Card */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Registered Users</CardTitle>
-            <CardDescription>
-              Total users: {users.length}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {loading ? (
-              <p className="text-center py-8">Loading users...</p>
-            ) : error ? (
-              <p className="text-red-500 text-center py-8">{error}</p>
-            ) : users.length === 0 ? (
-              <p className="text-center py-8 text-slate-400">No users found</p>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left py-3 px-4 font-semibold">Name</th>
-                      <th className="text-left py-3 px-4 font-semibold">Email</th>
-                      <th className="text-left py-3 px-4 font-semibold">User ID</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((user) => (
-                      <tr key={user._id} className="border-b hover:bg-slate-800/40">
-                        <td className="py-3 px-4">{user.name}</td>
-                        <td className="py-3 px-4">{user.email}</td>
-                        <td className="py-3 px-4 text-sm text-slate-400">{user._id}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Refresh Button */}
-        <div className="mt-6 flex gap-4">
-          <Button 
-            onClick={fetchUsers}
-            disabled={loading}
-          >
-            {loading ? "Refreshing..." : "Refresh Users"}
-          </Button>
-        </div>
-        </div>
       </div>
-    </div>
+
+      <Chatai/>
+      </div>
+
+   </div>
   )
 }
 

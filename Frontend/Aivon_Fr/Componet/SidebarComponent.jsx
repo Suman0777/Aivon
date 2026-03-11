@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Bookmark, BarChart3, Users, MessageSquare, Calendar, Settings, Folder, ChevronDown, UserSquare2, Users2Icon, UserRoundPlus, UserRound } from 'lucide-react';
 import Api from '../Componet/Api'
-
 import { Dropdown } from 'primereact/dropdown';
         
 export default function SidebarComponent() {
@@ -10,10 +9,22 @@ export default function SidebarComponent() {
     const [expandedSections, setExpandedSections] = useState({});
     const [userName, setUserName] = useState("Loading...");
     const [userEmail, setUserEmail] = useState("");
+    const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
     useEffect(() => {
         fetchCurrentUser();
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (profileMenuOpen && !event.target.closest('.profile-menu-container')) {
+                setProfileMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [profileMenuOpen]);
 
     const fetchCurrentUser = async () => {
         try {
@@ -48,6 +59,16 @@ export default function SidebarComponent() {
             ...prev,
             [section]: !prev[section]
         }));
+    };
+
+    const handleLogout = () => {
+        // Clear localStorage/sessionStorage (adjust based on your auth setup)
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        sessionStorage.clear();
+        
+        // Redirect to login page
+        window.location.href = '/login';
     };
 
     const toggleSidebar = () => {
@@ -176,11 +197,13 @@ export default function SidebarComponent() {
                 </div>
 
                 {/* User Profile Section */}
-                <div className="border-t border-cyan-300/20 p-3">
-                    <a href="#" className="flex items-center gap-3 rounded-md p-3 transition-colors hover:bg-slate-800/60">
+                <div className="border-t border-cyan-300/20 p-3 relative profile-menu-container">
+                    <button 
+                        onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+                        className="w-full flex items-center gap-3 rounded-md p-3 transition-colors hover:bg-slate-800/60"
+                    >
                         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-cyan-400 to-blue-500 text-white font-semibold shadow-[0_0_12px_rgba(56,189,248,0.4)]">
-                          <  UserRound size={20} />
-                          
+                          <UserRound size={20} />
                         </div>
                         <div className="flex flex-col overflow-hidden">
                             <span className="font-bold text-slate-100 truncate">{userName}</span>
@@ -188,7 +211,25 @@ export default function SidebarComponent() {
                                 <span className="text-xs text-slate-400 truncate">{userEmail}</span>
                             )}
                         </div>
-                    </a>
+                    </button>
+
+                    {/* Profile Menu Popup */}
+                    {profileMenuOpen && (
+                        <div 
+                            className="absolute bottom-full right-7 mb-2 w-48 bg-slate-800/95 border border-cyan-300/30 rounded-lg shadow-xl backdrop-blur-md z-50 popup-menu"
+                        >
+                            <div className="p-3 space-y-2">
+                                <div className="px-3 py-2 text-xs text-slate-400 font-semibold">ACCOUNT</div>
+                                <button
+                                    onClick={handleLogout}
+                                    className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-slate-300 hover:bg-red-500/20 hover:text-red-300 transition-colors text-sm"
+                                >
+                                    <i className="pi pi-sign-out" style={{ color: '#708090' }}></i>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </aside>
         </>
