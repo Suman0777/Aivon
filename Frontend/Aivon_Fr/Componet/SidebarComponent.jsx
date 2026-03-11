@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Bookmark, BarChart3, Users, MessageSquare, Calendar, Settings, Folder, ChevronDown, UserSquare2, Users2Icon, UserRoundPlus, UserRound } from 'lucide-react';
 import Api from '../Componet/Api'
 
+import { Dropdown } from 'primereact/dropdown';
+        
 export default function SidebarComponent() {
     const [isOpen, setIsOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState({});
@@ -60,7 +62,7 @@ export default function SidebarComponent() {
             {/* Mobile Hamburger Button - Only visible on mobile */}
             <button
                 onClick={toggleSidebar}
-                className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-lg hover:bg-gray-100 transition-colors"
+                className="lg:hidden fixed top-4 left-4 z-50 rounded-md border border-cyan-300/30 bg-slate-900/80 p-2 text-slate-100 shadow-lg backdrop-blur-md transition-colors hover:bg-slate-800/90"
                 aria-label="Toggle menu"
             >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -69,7 +71,7 @@ export default function SidebarComponent() {
             {/* Overlay for mobile */}
             {isOpen && (
                 <div
-                    className="lg:hidden fixed inset-0 bg-black/20 bg-opacity-100 z-40"
+                    className="lg:hidden fixed inset-0 z-40 bg-black/60"
                     onClick={toggleSidebar}
                 />
             )}
@@ -77,100 +79,63 @@ export default function SidebarComponent() {
             {/* Sidebar */}
             <aside
                 className={`
-                    fixed lg:sticky top-0 left-0 h-screen bg-white border-r border-gray-200 
+                    fixed lg:sticky top-0 left-0 h-screen border-r border-cyan-300/20 bg-linear-to-b from-[#030813]/95 via-[#071223]/90 to-[#040912]/95 backdrop-blur-xl
                     w-64 z-40 flex flex-col transition-transform duration-300 ease-in-out
                     ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
                 `}
             >
                 {/* Logo Section */}
-                <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+                <div className="flex items-center justify-between border-b border-cyan-300/20 px-4 py-4 h-20">
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                            <span className="text-black font-bold text-xl">A</span>
+                        <div className="hidden  lg:inline-flex h-8 w-auto items-center justify-center rounded-lg bg-linear-to-br from-cyan-400/2 to-blue-500 shadow-[0_0_12px_rgba(56,189,248,0.45)]">
+                            <img src='pocket.png' alt="Logo" className= "h-15 w-15 object-contain" />
                         </div>
-                        <span className="font-semibold text-xl text-gray-800">Aivon</span>
+                        <span className="hidden text-xl font-semibold text-slate-100 lg:block">Aivon</span>
                     </div>
-                    <button
-                        onClick={toggleSidebar}
-                        className="lg:hidden p-1 hover:bg-gray-100 rounded"
-                    >
-                        <X size={20} />
-                    </button>
+                    
+                    <img src='pocket.png' alt="Logo" className="h-16 w-auto object-contain lg:hidden" />
                 </div>
 
                 {/* Navigation Section */}
                 <div className="flex-1 overflow-y-auto py-4">
                     {/* Favorites Section */}
                     <div className="px-3 mb-4">
-                        <button
-                            onClick={() => toggleSection('favorites')}
-                            className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-50 rounded-md transition-colors"
-                        >
-                            <span>FAVORITES</span>
-                            <ChevronDown
-                                size={16}
-                                className={`transition-transform ${expandedSections.favorites ? 'rotate-180' : ''}`}
-                            />
-                        </button>
-
-                        {expandedSections.favorites !== false && (
-                            <ul className="mt-2 space-y-1">
+                        <ul className="mt-2 space-y-1">
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <Home size={18} />
-                                        <span className="font-medium">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <Bookmark size={18} />
-                                        <span className="font-medium">Bookmarks</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <BarChart3 size={18} />
-                                        <span className="font-medium">Reports</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <Users size={18} />
-                                        <span className="font-medium">Team</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <MessageSquare size={18} />
+                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
+                                        <MessageSquare size={19} />
                                         <span className="font-medium">Messages</span>
-                                        <span className="ml-auto bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                                            3
-                                        </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <Calendar size={18} />
-                                        <span className="font-medium">Calendar</span>
+                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-200 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
+                                        <i className="pi pi-images text-lg"></i>
+                                        <span className="font-medium">Image-Generation</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <Settings size={18} />
-                                        <span className="font-medium">Settings</span>
+                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
+                                        <i className="pi pi-microphone text-xl"></i>
+                                        <span className="font-medium">Text-to-voice</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
+                                        <i className="pi pi-address-book text-xl"></i>
+                                        <span className="font-medium">Background remover</span>
+                                    </a>
+                                </li>
+                                
                             </ul>
-                        )}
                     </div>
 
                     {/* Application Section */}
                     <div className="px-3 mb-4">
                         <button
                             onClick={() => toggleSection('application')}
-                            className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-50 rounded-md transition-colors"
+                            className="flex w-full items-center justify-between rounded-md px-3 py-2 text-xs font-semibold text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-slate-200"
                         >
-                            <span>APPLICATION</span>
+                            <span>CONTRIBUTION & LINKS</span>
                             <ChevronDown
                                 size={16}
                                 className={`transition-transform ${expandedSections.application ? 'rotate-180' : ''}`}
@@ -180,19 +145,27 @@ export default function SidebarComponent() {
                         {expandedSections.application !== false && (
                             <ul className="mt-2 space-y-1">
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
+                                    <a
+                                        href="https://github.com/Suman0777/Aivon"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200"
+                                    >
+                                    <i className="pi pi-github text-xl"></i>
+                                    <span className="font-medium">Github</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" 
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
                                         <Folder size={18} />
                                         <span className="font-medium">Projects</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-                                        <BarChart3 size={18} />
-                                        <span className="font-medium">Performance</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
+                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
                                         <Settings size={18} />
                                         <span className="font-medium">Settings</span>
                                     </a>
@@ -203,15 +176,16 @@ export default function SidebarComponent() {
                 </div>
 
                 {/* User Profile Section */}
-                <div className="border-t border-gray-200 p-3">
-                    <a href="#" className="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-md transition-colors">
-                        <div className="w-5 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold">
+                <div className="border-t border-cyan-300/20 p-3">
+                    <a href="#" className="flex items-center gap-3 rounded-md p-3 transition-colors hover:bg-slate-800/60">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-cyan-400 to-blue-500 text-white font-semibold shadow-[0_0_12px_rgba(56,189,248,0.4)]">
                           <  UserRound size={20} />
+                          
                         </div>
                         <div className="flex flex-col overflow-hidden">
-                            <span className="font-bold text-gray-800 truncate">{userName}</span>
+                            <span className="font-bold text-slate-100 truncate">{userName}</span>
                             {userEmail && (
-                                <span className="text-xs text-gray-500 truncate">{userEmail}</span>
+                                <span className="text-xs text-slate-400 truncate">{userEmail}</span>
                             )}
                         </div>
                     </a>

@@ -41,15 +41,32 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="relative flex min-h-screen w-full overflow-x-hidden bg-linear-to-b from-[#02030a] via-[#040915] to-[#010106] text-slate-100">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute -left-24 top-0 h-80 w-80 rounded-full bg-cyan-400/20 blur-3xl sm:h-96 sm:w-96" />
+        <div className="absolute -right-20 top-20 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl sm:h-96 sm:w-96" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-fuchsia-500/10 blur-3xl sm:h-96 sm:w-96" />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(34,211,238,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.1) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+          }}
+        />
+      </div>
+
       <SidebarComponent/>
-      <div className="flex-1 p-8">
+      <div className="relative z-10 flex-1 p-6 sm:p-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
-              <p className="text-gray-600 mt-2">Welcome back! Here are all registered users.</p>
+              <h1 className="text-4xl font-bold text-slate-100">Dashboard</h1>
+              <p className="text-slate-300 mt-2">Welcome back! Here are all registered users.</p>
             </div>
             <Button 
               variant="destructive"
@@ -73,7 +90,7 @@ const Dashboard = () => {
             ) : error ? (
               <p className="text-red-500 text-center py-8">{error}</p>
             ) : users.length === 0 ? (
-              <p className="text-center py-8 text-gray-500">No users found</p>
+              <p className="text-center py-8 text-slate-400">No users found</p>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -86,10 +103,10 @@ const Dashboard = () => {
                   </thead>
                   <tbody>
                     {users.map((user) => (
-                      <tr key={user._id} className="border-b hover:bg-gray-50">
+                      <tr key={user._id} className="border-b hover:bg-slate-800/40">
                         <td className="py-3 px-4">{user.name}</td>
                         <td className="py-3 px-4">{user.email}</td>
-                        <td className="py-3 px-4 text-sm text-gray-500">{user._id}</td>
+                        <td className="py-3 px-4 text-sm text-slate-400">{user._id}</td>
                       </tr>
                     ))}
                   </tbody>

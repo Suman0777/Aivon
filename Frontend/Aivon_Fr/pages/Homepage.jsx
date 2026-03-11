@@ -49,17 +49,15 @@ const Homepage = () => {
       </section>
 
       {/* SECOND SECTION */}
-      <section className="relative h-full w-full bg-linear-to-b from-[#020714] via-[#040b1b] to-[#01040d] px-4 pt-20">
+      <section className="relative h-full w-full bg-linear-to-b from-[#020714] via-[#040b1b] to-[#01040d]  px-4 ">
 
         <div className="pointer-events-none absolute inset-0 opacity-70">
           <div className="absolute -top-10 right-0 h-64 w-64 rounded-full bg-cyan-400/15 blur-3xl" />
           <div className="absolute bottom-10 -left-8 h-72 w-72 rounded-full bg-violet-500/15 blur-3xl" />
         </div>
 
-        <div className="relative z-10">
-          <SecondLower />
-          <Footer />
-        </div>
+        <SecondLower />
+        <Footer/>
       </section>
 
     </div>
