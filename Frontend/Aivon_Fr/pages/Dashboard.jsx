@@ -69,7 +69,9 @@ const Dashboard = () => {
       <SidebarComponent/>
       </div>
 
-      <Chatai/>
+      <div className="flex flex-1 flex-col lg:ml-64">
+        <Chatai />
+      </div>
       </div>
 
    </div>

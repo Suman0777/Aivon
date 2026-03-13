@@ -109,7 +109,7 @@ export default function SidebarComponent() {
                 <div className="flex items-center justify-between border-b border-cyan-300/20 px-4 py-4 h-20">
                     <div className="flex items-center gap-2">
                         <div className="hidden  lg:inline-flex h-8 w-auto items-center justify-center rounded-lg bg-linear-to-br from-cyan-400/2 to-blue-500 shadow-[0_0_12px_rgba(56,189,248,0.45)]">
-                            <img src='pocket.png' alt="Logo" className= "h-15 w-15 object-contain" />
+                            <img src='pocket.png' alt="Logo" className= " h-15 w-15 object-contain" />
                         </div>
                         <span className="hidden text-xl font-semibold text-slate-100 lg:block">Aivon</span>
                     </div>

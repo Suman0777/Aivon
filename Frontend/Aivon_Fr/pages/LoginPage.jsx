@@ -119,6 +119,7 @@ function SignupCard({ setActiveCard, toast }) {
 
       <CardFooter className="flex justify-between">
         <Button
+        className= "bg-gray-800/20"
           type="button"
           variant="outline"
           onClick={() => setActiveCard(true)}
@@ -128,6 +129,7 @@ function SignupCard({ setActiveCard, toast }) {
         </Button>
         
         <Button 
+          className= "bg-black"
           type="submit"
           onClick={handleSignup}
           disabled={loading}
@@ -236,7 +238,9 @@ function Login({ setActiveCard, toast }) {
       </CardContent>
 
       <CardFooter className="flex justify-between">
+
         <Button
+        className= "bg-gray-800/20"
           type="button"
           variant="outline"
           onClick={() => setActiveCard(false)}
@@ -245,6 +249,7 @@ function Login({ setActiveCard, toast }) {
           Register
         </Button>
         <Button 
+          className= "bg-black"
           type="submit"
           onClick={handleLogin}
           disabled={loading}
