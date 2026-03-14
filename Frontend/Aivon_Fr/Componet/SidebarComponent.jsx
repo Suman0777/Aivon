@@ -4,7 +4,7 @@ import { Menu, X, Home, Bookmark, BarChart3, Users, MessageSquare, Calendar, Set
 import Api from '../Componet/Api'
 import { Dropdown } from 'primereact/dropdown';
         
-export default function SidebarComponent() {
+export default function SidebarComponent({ activeItem = 'messages', onNavigate }) {
     const [isOpen, setIsOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState({});
     const [userName, setUserName] = useState("Loading...");
@@ -75,6 +75,13 @@ export default function SidebarComponent() {
         setIsOpen(!isOpen);
     };
 
+    const handleNavClick = (item, event) => {
+        event.preventDefault();
+        onNavigate?.(item);
+        // Close the drawer after selecting an item on mobile.
+        setIsOpen(false);
+    };
+
 
 
 
@@ -123,13 +130,29 @@ export default function SidebarComponent() {
                     <div className="px-3 mb-4">
                         <ul className="mt-2 space-y-1">
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
+                                    <a
+                                        href="#messages"
+                                        onClick={(event) => handleNavClick('messages', event)}
+                                        className={`flex items-center gap-3 rounded-md px-3 py-2 transition-colors ${
+                                            activeItem === 'messages'
+                                                ? 'bg-cyan-500/20 text-cyan-100'
+                                                : 'text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-200'
+                                        }`}
+                                    >
                                         <MessageSquare size={19} />
                                         <span className="font-medium">Messages</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-200 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
+                                    <a
+                                        href="#image-generation"
+                                        onClick={(event) => handleNavClick('imageGeneration', event)}
+                                        className={`flex items-center gap-3 rounded-md px-3 py-2 transition-colors ${
+                                            activeItem === 'imageGeneration'
+                                                ? 'bg-cyan-500/20 text-cyan-100'
+                                                : 'text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-200'
+                                        }`}
+                                    >
                                         <i className="pi pi-images text-lg"></i>
                                         <span className="font-medium">Image-Generation</span>
                                     </a>

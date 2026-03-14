@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { useAuth } from '../src/context/AuthContext'
 import Api from '../Componet/Api'
 import Chatai from '../Aicomponet/Chatai'
+import ImageGeneration from '../Aicomponet/ImageGeneration'
         
 import {
   Card,
@@ -19,6 +20,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [activeView, setActiveView] = useState('messages')
 
   useEffect(() => {
     fetchUsers()
@@ -66,11 +68,12 @@ const Dashboard = () => {
       
       {/* Slidebar */}
       <div className="lg:fixed">
-      <SidebarComponent/>
+      <SidebarComponent activeItem={activeView} onNavigate={setActiveView} />
       </div>
 
       <div className="flex flex-1 flex-col lg:ml-64">
-        <Chatai />
+        {activeView === 'messages' && <Chatai />}
+        {activeView === 'imageGeneration' && <ImageGeneration />}
       </div>
       </div>
 
