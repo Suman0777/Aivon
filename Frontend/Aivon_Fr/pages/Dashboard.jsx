@@ -13,6 +13,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import SidebarComponent from '../Componet/SidebarComponent'
+import TexttoImage from '../Aicomponet/TexttoImage'
+import BgRemover from '../Aicomponet/BgRemover'
 
 const Dashboard = () => {
   const { logout } = useAuth()
@@ -74,6 +76,8 @@ const Dashboard = () => {
       <div className="flex flex-1 flex-col lg:ml-64">
         {activeView === 'messages' && <Chatai />}
         {activeView === 'imageGeneration' && <ImageGeneration />}
+        {activeView === 'texttoimage' && <TexttoImage />}
+        {activeView === 'bgremover' && <BgRemover />}
       </div>
       </div>
 
