@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { useAuth } from '../src/context/AuthContext'
 import Api from '../Componet/Api'
 import Chatai from '../Aicomponet/Chatai'
-import ImageGeneration from '../Aicomponet/ImageGeneration'
+import TextToVoiceGenerator from '../Aicomponet/TextToVoiceGenerator'
         
 import {
   Card,
@@ -75,7 +75,7 @@ const Dashboard = () => {
 
       <div className="flex flex-1 flex-col lg:ml-64">
         {activeView === 'messages' && <Chatai />}
-        {activeView === 'imageGeneration' && <ImageGeneration />}
+        {activeView === 'imageGeneration' && <TextToVoiceGenerator />}
         {activeView === 'texttoimage' && <TexttoImage />}
         {activeView === 'bgremover' && <BgRemover />}
       </div>

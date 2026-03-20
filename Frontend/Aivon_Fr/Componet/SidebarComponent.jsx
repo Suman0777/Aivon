@@ -153,8 +153,8 @@ export default function SidebarComponent({ activeItem = 'messages', onNavigate }
                                                 : 'text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-200'
                                         }`}
                                     >
-                                        <i className="pi pi-images text-lg"></i>
-                                        <span className="font-medium">Image-Generation</span>
+                                        <i className="pi pi-microphone text-lg"></i>
+                                        <span className="font-medium">Text-to-Voice</span>
                                     </a>
                                 </li>
                                 <li>

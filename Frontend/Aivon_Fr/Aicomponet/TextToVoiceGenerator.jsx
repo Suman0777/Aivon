@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Api from '../Componet/Api'
 import { ShinyButton } from '@/components/ui/shiny-button'
 
-const ImageGeneration = () => {
+const TextToVoiceGenerator = () => {
   const [prompt, setPrompt] = useState('')
   const [imageUrl, setImageUrl] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -50,8 +50,8 @@ const ImageGeneration = () => {
 
       {/* Header */}
       <div className="relative z-10 px-6 pt-8 pb-4">
-        <h1 className="text-2xl font-bold text-slate-100">Image Generation</h1>
-        <p className="text-sm text-slate-400 mt-1">Describe what you want to see and Aivon will generate it.</p>
+        <h1 className="text-2xl font-bold text-slate-100">Text-To-voice Generation</h1>
+        <p className="text-sm text-slate-400 mt-1">Describe what you want to hear from Aivon we will generate it.....</p>
       </div>
 
       {/* Image preview area */}
@@ -59,7 +59,7 @@ const ImageGeneration = () => {
         {loading && (
           <div className="flex flex-col items-center gap-3 text-slate-400">
             <div className="h-12 w-12 rounded-full border-4 border-cyan-400/30 border-t-cyan-400 animate-spin" />
-            <span className="text-sm">Generating your image…</span>
+            <span className="text-sm">Generating your voice clip…</span>
           </div>
         )}
 
@@ -81,13 +81,13 @@ const ImageGeneration = () => {
               download="aivon-image.png"
               className="text-xs text-cyan-400 hover:text-cyan-200 transition-colors"
             >
-              Download image
+              Download voice clip
             </a>
           </div>
         )}
 
         {!loading && !error && !imageUrl && (
-          <div className="text-slate-600 text-sm select-none">Your generated image will appear here.</div>
+          <div className="text-slate-600 text-sm select-none">Your generated text will appear here.</div>
         )}
       </div>
 
@@ -101,7 +101,7 @@ const ImageGeneration = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             type="text"
-            placeholder="Describe the image you want to generate…"
+            placeholder="Describe the text you want to convert to voice…"
             disabled={loading}
             className="flex-1 bg-transparent text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none"
           />
@@ -110,7 +110,7 @@ const ImageGeneration = () => {
             disabled={loading || !prompt.trim()}
             className="text-slate-50 border-none bg-gradient-to-br from-cyan-400/80 to-blue-500/80 shadow-[0_0_12px_rgba(56,189,248,0.45)] hover:shadow-[0_0_24px_rgba(56,189,248,0.65)]"
           >
-            <i className="pi pi-image text-white"></i>
+            <i className="pi pi-microphone text-white"></i>
           </ShinyButton>
         </form>
       </div>
@@ -119,4 +119,4 @@ const ImageGeneration = () => {
   )
 }
 
-export default ImageGeneration
+export default TextToVoiceGenerator
