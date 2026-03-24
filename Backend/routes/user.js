@@ -1,6 +1,6 @@
 import express from "express"
 const routes = express.Router();
-import Zod, { email } from "zod"
+import Zod from "zod"
 import User from "../db.js";
 import JWT from "jsonwebtoken";
 import { auth } from "../auth.js";

@@ -5,9 +5,14 @@ import "dotenv/config";
 
 const routes = express.Router();
 
-/* Text Schema */
+/* Updated Schema: Validating an array of messages */
 const chatSchema = z.object({
-    message: z.string().min(1, "Message is required"),
+    messages: z.array(
+        z.object({
+            role: z.enum(["user", "assistant"]),
+            content: z.string().min(1, "Message content is required")
+        })
+    ).min(1, "At least one message is required"),
 });
 
 /* Hugging Face Client */
@@ -28,32 +33,34 @@ routes.post("/chat", async (req, res) => {
             });
         }
 
-        const { message } = parsed.data;
+        const { messages } = parsed.data;
+
+        // Aivon's core identity and instructions
+        const systemPrompts = [
+            {
+                role: "system",
+                content: "You are an AI named Aivon.",
+            },
+            {
+                role: "system",
+                content: "You are an AI which can perform tasks based on text to text conversation.",
+            },
+            {
+                role: "system",
+                content: "Your features are text generation only."
+            },
+            {
+                role: "system",
+                content: "And if someone asks you for image or voice generation, tell them to use the side bar for that."
+            }
+        ];
+
+        // Merge system instructions with the user's ongoing chat history
+        const fullConversation = [...systemPrompts, ...messages];
 
         const response = await client.chatCompletion({
             model: "Qwen/Qwen2.5-7B-Instruct",
-            messages: [
-                {
-                    role: "system",
-                    content: "You are an AI named Avion.",
-                },
-                {
-                    role: "system",
-                    content: "You are an AI which can perform task based on text to text conversation.",
-                },
-                {
-                    role: "system",
-                    content: "you feature are text generation only"
-                },
-                {
-                    role: "system",
-                    content: "And if someone ask you for image or voice generation tell them to just the side bar for that"
-                },
-                {
-                    role: "user",
-                    content: message,
-                },
-            ],
+            messages: fullConversation,
         });
 
         const reply = response.choices[0].message.content;
