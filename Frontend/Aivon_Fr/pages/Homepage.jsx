@@ -22,11 +22,11 @@ const Homepage = () => {
         <div className="pointer-events-none absolute inset-0 z-0 opacity-25">
           <div
             className="h-full w-full"
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(34,211,238,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.12) 1px, transparent 1px)',
-              backgroundSize: '56px 56px',
-            }}
+            // style={{
+            //   backgroundImage:
+            //     'linear-gradient(rgba(34,211,238,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.12) 1px, transparent 1px)',
+            //   backgroundSize: '56px 56px',
+            // }}
           />
         </div>
 
