@@ -72,9 +72,7 @@ const TexttoImage = () => {
 
     const requestImage = async (finalPrompt) => {
         const candidateEndpoints = [
-            '/api/v1/ai/text-to-image',
-            '/api/v1/ai/generate-image',
-            '/api/v1/ai/image',
+            '/api/v1/images/generate',
         ]
 
         for (const endpoint of candidateEndpoints) {
