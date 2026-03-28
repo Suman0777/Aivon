@@ -215,11 +215,11 @@ export default function SidebarComponent({ activeItem = 'messages', onNavigate }
                                 </li>
                                 <li>
                                     <a href="#" 
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        // target="_blank"
+                                        // rel="noopener noreferrer"
                                         className="flex items-center gap-3 rounded-md px-3 py-2 text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-200">
                                         <Folder size={18} />
-                                        <span className="font-medium">Projects</span>
+                                        <span className="font-medium">Generated Images</span>
                                     </a>
                                 </li>
                                 <li>

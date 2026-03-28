@@ -87,8 +87,8 @@ const TexttoImage = () => {
                 if (imageUrl) {
                     return imageUrl
                 }
-            } catch {
-                // Try the next endpoint.
+            } catch (error) {
+                console.error('Error occurred while fetching image from endpoint:', endpoint, error.response?.data || error.message);
             }
         }
 
@@ -153,7 +153,7 @@ const TexttoImage = () => {
                     <div className="max-w-3xl space-y-3">
                         <span className="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-cyan-200">
                             <i className="pi pi-sparkles text-xs" />
-                            Prompt Studio
+                            Image Studio
                         </span>
                         <div>
                             <h1 className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">
@@ -417,7 +417,14 @@ const TexttoImage = () => {
                                                 {item.style} • {item.ratio} • {item.createdAt}
                                             </p>
                                         </div>
-                                        <i className="pi pi-arrow-up-right text-slate-500" />
+                                        <a
+                                        href={item.imageUrl}
+                                        download="aivon-text-to-image.png"
+                                        className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-400/10 px-3 py-2 text-xs font-medium text-cyan-100 transition hover:bg-cyan-400/20"
+                                    >
+                                        <i className="pi pi-download" />
+                                        Download
+                                    </a>
                                     </button>
                                 ))}
                             </div>

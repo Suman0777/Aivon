@@ -4,7 +4,7 @@ import { ShinyButton } from '@/components/ui/shiny-button'
 
 const TextToVoiceGenerator = () => {
   const [prompt, setPrompt] = useState('')
-  const [imageUrl, setImageUrl] = useState(null)
+  const [voiceUrl, setVoiceUrl] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -15,23 +15,23 @@ const TextToVoiceGenerator = () => {
 
     setLoading(true)
     setError('')
-    setImageUrl(null)
+    setVoiceUrl(null)
 
     try {
-      const response = await Api.post('/api/v1/ai/image', { prompt: trimmed })
+      const response = await Api.post('/api/v1/ai/voice', { prompt: trimmed })
       const url =
-        response?.data?.imageUrl ||
+        response?.data?.voiceUrl ||
         response?.data?.url ||
-        response?.data?.image
+        response?.data?.voice
       if (url) {
-        setImageUrl(url)
+        setVoiceUrl(url)
       } else {
-        setError('No image was returned from the server.')
+        setError('No voice clip was returned from the server.')
       }
     } catch (err) {
       setError(
         err.response?.data?.message ||
-        'Failed to generate image. Please try again.'
+        'Failed to generate voice clip. Please try again.'
       )
     } finally {
       setLoading(false)
@@ -54,7 +54,7 @@ const TextToVoiceGenerator = () => {
         <p className="text-sm text-slate-400 mt-1">Describe what you want to hear from Aivon we will generate it.....</p>
       </div>
 
-      {/* Image preview area */}
+      {/* voice clip preview area */}
       <div className="flex-1 overflow-y-auto relative z-10 flex items-center justify-center px-6 pb-4">
         {loading && (
           <div className="flex flex-col items-center gap-3 text-slate-400">
@@ -69,16 +69,16 @@ const TextToVoiceGenerator = () => {
           </div>
         )}
 
-        {!loading && !error && imageUrl && (
+        {!loading && !error && voiceUrl && (
           <div className="flex flex-col items-center gap-4">
-            <img
-              src={imageUrl}
+            <audio controls
+              src={voiceUrl}
               alt="Generated"
               className="max-h-[60vh] max-w-full rounded-2xl border border-cyan-300/20 shadow-[0_0_40px_rgba(56,189,248,0.15)] object-contain"
             />
             <a
-              href={imageUrl}
-              download="aivon-image.png"
+              href={voiceUrl}
+              download="aivon-voice.mp3"
               className="text-xs text-cyan-400 hover:text-cyan-200 transition-colors"
             >
               Download voice clip
@@ -86,8 +86,8 @@ const TextToVoiceGenerator = () => {
           </div>
         )}
 
-        {!loading && !error && !imageUrl && (
-          <div className="text-slate-600 text-sm select-none">Your generated text will appear here.</div>
+        {!loading && !error && !voiceUrl && (
+          <div className="text-slate-600 text-sm select-none">Your generated voice clip will appear here.</div>
         )}
       </div>
 
