@@ -18,7 +18,7 @@ const TextToVoiceGenerator = () => {
     setVoiceUrl(null)
 
     try {
-      const response = await Api.post('/api/v1/ai/voice', { prompt: trimmed })
+      const response = await Api.post('/api/v1/voices/generate-voice', { prompt: trimmed })
       const url =
         response?.data?.voiceUrl ||
         response?.data?.url ||
@@ -87,7 +87,16 @@ const TextToVoiceGenerator = () => {
         )}
 
         {!loading && !error && !voiceUrl && (
-          <div className="text-slate-600 text-sm select-none">Your generated voice clip will appear here.</div>
+          <div className=" mr-5 text-slate-600 text-sm select-none rounded-xl border border-green-500/30 bg-green-500/10 px-6 py-4 text-green-300 text-sm max-w-xl gap-1.5 flex flex-col items-start md:mr-0 ">
+          <i className="pi pi-info-circle text-green-400 text-sm"><span className="px-2 font-bold text-green-400">Note:</span></i> 
+          <p>
+            - Please note that there may be a short delay while the audio is being generated, and there is a limit on the length of the input text.
+          </p>
+
+          <p>
+            - This service allows up to <span className="font-bold text-blue-400">5</span> generation requests per day due to free-tier limitations. Thank you for your understanding.
+          </p>
+          </div>
         )}
       </div>
 

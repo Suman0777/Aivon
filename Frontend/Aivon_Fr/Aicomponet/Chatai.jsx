@@ -89,7 +89,7 @@ const Chatai = () => {
       />
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto flex flex-col gap-4 p-6 relative z-10">
+      <div className=" flex-1 overflow-y-auto flex flex-col gap-4 p-6 relative z-10 mr-2 rounded-lg mt-4">
         {messages.map((msg, idx) => (
           <div
             key={`${msg.role}-${idx}`}
@@ -111,7 +111,7 @@ const Chatai = () => {
         {loading && (
           <div className="flex w-full justify-start">
             <div className="max-w-[85%] rounded-2xl px-4 py-3 bg-slate-800/70 text-slate-300 border border-slate-700/70">
-              Aivon is typing...
+              Avion is typing  <i className="pi pi-spinner-dotted animate-spin"></i>
             </div>
           </div>
         )}
