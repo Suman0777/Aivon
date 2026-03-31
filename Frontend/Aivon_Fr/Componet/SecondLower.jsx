@@ -4,37 +4,37 @@ import { motion } from "framer-motion";
 const SecondLower = () => {
   const cardData = [
     {
-      image: "/image_generation.png",
+      image: "pi pi-microphone text-white", 
       title: "AI Chat",
       description:
         "Smart conversational AI to answer your questions instantly.",
     },
     {
-      image: "/image_generation.png",
+      image: "pi pi-image text-white",
       title: "BG Remover",
       description:
         "Remove image backgrounds automatically with AI precision.",
     },
     {
-      image: "/image_generation.png",
+      image: "pi pi-image text-white",
       title: "Text to Image",
       description:
         "Generate stunning images from simple text prompts.",
     },
     {
-      image: "/image_generation.png",
+      image: "pi pi-microphone text-white",
       title: "Text to Voice",
       description:
         "Convert written text into natural-sounding voice.",
     },
     {
-      image: "/image_generation.png",
+      image: "pi pi-file text-white",
       title: "Ai Article Writer",
       description:
         "Generate high-quality articles on any topic with AI writing assistance.",
     },
     {
-      image: "/image_generation.png",
+      image: "pi pi-lightbulb text-white",
       title: "Prompt Generator",
       description:
         "Generate creative and effective prompts for your AI interactions.",
@@ -80,11 +80,13 @@ const SecondLower = () => {
             flex items-center justify-center 
             shadow-lg mb-5">
 
-              <img
+              {/* <img
                 src={card.image}
                 alt={card.title}
                 className="w-7 h-7 object-contain"
-              />
+              /> */}
+              {/* Using dangerouslySetInnerHTML to render the icon HTML string */}
+              <i className={card.image}></i>
             </div>
 
             {/* Title */}

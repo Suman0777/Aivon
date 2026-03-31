@@ -7,24 +7,55 @@ const TextToVoiceGenerator = () => {
   const [voiceUrl, setVoiceUrl] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const MIN_len = 10;
+  const MAX_len = 700;
+  const [usage, setUsage] = useState({
+    used: 0,
+    limit: 5
+  });
 
   const handleGenerate = async (e) => {
     e.preventDefault()
+
     const trimmed = prompt.trim()
+
     if (!trimmed || loading) return
 
+    if(trimmed.length < MIN_len) {
+      return setError("Your prompt is too short. Please provide a more detailed description of the voice you want to generate. Minimum length is 10 characters.");
+    }
+    
+    if (trimmed.length > MAX_len) {
+      return setError("Your prompt exceeds the maximum allowed length of 700 characters. Please shorten it and try again.");
+    }
+    
+    if(usage.used >= usage.limit){
+      return setError("You have reached the maximum number of generation requests for today. Please try again tomorrow.");
+    }
     setLoading(true)
     setError('')
     setVoiceUrl(null)
 
     try {
-      const response = await Api.post('/api/v1/voices/generate-voice', { prompt: trimmed })
-      const url =
-        response?.data?.voiceUrl ||
-        response?.data?.url ||
-        response?.data?.voice
+      const response = await Api.post('/api/v1/voices/generate-voice', 
+        { prompt: trimmed },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          },
+          responseType: 'blob'
+        }
+      )
+      
+      const url = URL.createObjectURL(response.data)
+      
       if (url) {
         setVoiceUrl(url)
+        setPrompt('');
+        setUsage({
+          used: parseInt(response.headers['x-usage-used'] ?? usage.used + 1),
+          limit: parseInt(response.headers['x-usage-limit'] ?? usage.limit),
+        })
       } else {
         setError('No voice clip was returned from the server.')
       }
@@ -49,9 +80,14 @@ const TextToVoiceGenerator = () => {
       />
 
       {/* Header */}
-      <div className="relative z-10 px-6 pt-8 pb-4">
-        <h1 className="text-2xl font-bold text-slate-100">Text-To-voice Generation</h1>
-        <p className="text-sm text-slate-400 mt-1">Describe what you want to hear from Aivon we will generate it.....</p>
+      <div className="relative z-10 px-6 pt-8 pb-4 flex items-center justify-between gap-3.5">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-100">Text-To-voice Generation</h1>
+          <p className="text-sm text-slate-400 mt-1">Describe what you want to hear from Aivon we will generate it.....</p>
+        </div>
+        <div className="flex h-10 w-5 mr-3 items-center justify-center rounded-full bg-linear-to-br from-cyan-400 to-blue-500 text-white font-semibold shadow-[0_0_12px_rgba(56,189,248,0.4)] md:mr-0 max-w-30">
+            {usage.used} / {usage.limit}
+        </div>        
       </div>
 
       {/* voice clip preview area */}
@@ -78,7 +114,7 @@ const TextToVoiceGenerator = () => {
             />
             <a
               href={voiceUrl}
-              download="aivon-voice.mp3"
+              download="aivon-voice.flac"
               className="text-xs text-cyan-400 hover:text-cyan-200 transition-colors"
             >
               Download voice clip
@@ -88,13 +124,13 @@ const TextToVoiceGenerator = () => {
 
         {!loading && !error && !voiceUrl && (
           <div className=" mr-5 text-slate-600 text-sm select-none rounded-xl border border-green-500/30 bg-green-500/10 px-6 py-4 text-green-300 text-sm max-w-xl gap-1.5 flex flex-col items-start md:mr-0 ">
-          <i className="pi pi-info-circle text-green-400 text-sm"><span className="px-2 font-bold text-green-400">Note:</span></i> 
-          <p>
-            - Please note that there may be a short delay while the audio is being generated, and there is a limit on the length of the input text.
+          <i className="pi pi-info-circle text-green-400 text-sm py-1"><span className="px-2 font-bold text-green-400 font-sans">Note:</span></i> 
+          <p className='font-sans'>
+            - 500-700 characters limit are there for free tier!
           </p>
 
-          <p>
-            - This service allows up to <span className="font-bold text-blue-400">5</span> generation requests per day due to free-tier limitations. Thank you for your understanding.
+          <p className='font-sans'>
+            - This service allows up to <span className="font-bold text-blue-400">5</span> generation requests per day.
           </p>
           </div>
         )}
@@ -111,12 +147,12 @@ const TextToVoiceGenerator = () => {
             onChange={(e) => setPrompt(e.target.value)}
             type="text"
             placeholder="Describe the text you want to convert to voice…"
-            disabled={loading}
+            disabled={loading || usage.used >= usage.limit }
             className="flex-1 bg-transparent text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none"
           />
           <ShinyButton
             onClick={handleGenerate}
-            disabled={loading || !prompt.trim()}
+            disabled={loading || !prompt.trim() || usage.used >= usage.limit }
             className="text-slate-50 border-none bg-gradient-to-br from-cyan-400/80 to-blue-500/80 shadow-[0_0_12px_rgba(56,189,248,0.45)] hover:shadow-[0_0_24px_rgba(56,189,248,0.65)]"
           >
             <i className="pi pi-microphone text-white"></i>
