@@ -131,13 +131,13 @@ const Chatai = () => {
             type="text"
             placeholder="Ask Aivon anything..."
             disabled={loading}
-            className="flex-1 bg-transparent text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none"
+            className="absolute  lg:static flex-1 bg-transparent text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none left-4 right-12 py-2"
           />
 
           <ShinyButton 
             onClick={handleSend}
             disabled={loading || !input.trim()}
-            className="text-slate-50 border-none bg-gradient-to-br from-cyan-400/80 to-blue-500/80 shadow-[0_0_12px_rgba(56,189,248,0.45)] hover:shadow-[0_0_24px_rgba(56,189,248,0.65)] ">
+            className="relative left-35 md:static  text-slate-50 border-none bg-gradient-to-br from-cyan-400/80 to-blue-500/80 shadow-[0_0_12px_rgba(56,189,248,0.45)] hover:shadow-[0_0_24px_rgba(56,189,248,0.65)] ">
             <i className="pi pi-send text-white"></i>
           </ShinyButton>
         </form>
