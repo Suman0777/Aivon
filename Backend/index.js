@@ -11,7 +11,9 @@ dotenv.config()
 
 {/* For backend Connect with the rote */}
 
-app.use(cores());
+app.use(cores({
+    origin: "*"
+}));
 
 {/* Body Pharser */}
 
