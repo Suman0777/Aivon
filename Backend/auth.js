@@ -1,26 +1,23 @@
-import express from "express"
-import JWT from "jsonwebtoken"
+import JWT from "jsonwebtoken";
+
 export const auth = (req, res, next) => {
-    const authheadertoken = req.headers.authtoken;
+  const authHeaderToken = req.headers.authtoken;
 
-    if(!authheadertoken || !authheadertoken.startsWith('Bearer')){
-        return res.status(404).json({
-            msg: "Token Not Found!"
-        })
-    }
+  if (!authHeaderToken || !authHeaderToken.startsWith("Bearer ")) {
+    return res.status(401).json({
+      msg: "Access denied. No token provided.",
+    });
+  }
 
-    const token = authheadertoken.split(' ')[1];
+  const token = authHeaderToken.split(" ")[1];
 
-    try {
-        
-        const jettoken = JWT.verify(token,process.env.JWT_SECRET);
-
-        req.userId = jettoken.userId;
-
-        next();
-    } catch (error) {
-        return res.status(404).json({
-            msg: error.message
-        })
-    }
-}
+  try {
+    const decoded = JWT.verify(token, process.env.JWT_SECRET);
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      msg: "Invalid or expired token.",
+    });
+  }
+};
