@@ -213,7 +213,7 @@ export default function SidebarComponent({ activeItem = 'messages', onNavigate }
                                     <span className="font-medium">Github</span>
                                     </a>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <a href="#" 
                                         // target="_blank"
                                         // rel="noopener noreferrer"
@@ -227,7 +227,7 @@ export default function SidebarComponent({ activeItem = 'messages', onNavigate }
                                         <Settings size={18} />
                                         <span className="font-medium">Settings</span>
                                     </a>
-                                </li>
+                                </li> */}
                             </ul>
                         )}
                     </div>
